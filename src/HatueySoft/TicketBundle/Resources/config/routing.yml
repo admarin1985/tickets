@@ -1,0 +1,40 @@
+empresa:
+    resource: "@HatueySoftTicketBundle/Controller/EmpresaController.php"
+    type: annotation
+
+proyecto:
+    resource: "@HatueySoftTicketBundle/Controller/ProyectoController.php"
+    type: annotation
+
+ticket:
+    resource: "@HatueySoftTicketBundle/Controller/TicketController.php"
+    type: annotation
+
+respuesta:
+    resource: "@HatueySoftTicketBundle/Controller/RespuestaController.php"
+    type: annotation
+
+comentario:
+    resource: "@HatueySoftTicketBundle/Controller/ComentarioController.php"
+    type: annotation
+
+clasificadorTicket:
+    resource: "@HatueySoftTicketBundle/Controller/ClasificadorTicketController.php"
+    type: annotation
+
+clasificadorPrioridad:
+    resource: "@HatueySoftTicketBundle/Controller/ClasificadorPrioridadController.php"
+    type: annotation
+
+clasificadorEstado:
+    resource: "@HatueySoftTicketBundle/Controller/ClasificadorEstadoController.php"
+    type: annotation
+
+clasificadorEstadoProyecto:
+    resource: "@HatueySoftTicketBundle/Controller/ClasificadorEstadoProyectoController.php"
+    type: annotation
+
+clasificadorEtapa:
+    resource: "@HatueySoftTicketBundle/Controller/ClasificadorEtapaController.php"
+    type: annotation
+

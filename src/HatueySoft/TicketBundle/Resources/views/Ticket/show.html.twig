@@ -1,0 +1,45 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'Ticket show' %}
+
+{% block tituloPagina %}
+    <h1>Ticket show</h1>
+{% endblock %}
+
+{% block content -%}
+
+    <table class="records_list table table-hover table-striped table-bordered table-condensed">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Tema</th>
+                <td>{{ entity.tema }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ entity.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('ticket') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

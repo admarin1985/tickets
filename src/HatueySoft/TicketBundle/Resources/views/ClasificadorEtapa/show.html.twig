@@ -1,0 +1,38 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'ClasificadorEtapa' %}
+
+{% block tituloPagina %}
+    <h1>ClasificadorEtapa</h1>
+{% endblock %}
+
+{% block content -%}
+    <h1>ClasificadorEtapa</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('clasificadoretapa') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('clasificadoretapa_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

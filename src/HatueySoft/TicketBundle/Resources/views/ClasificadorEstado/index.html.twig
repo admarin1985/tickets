@@ -1,0 +1,48 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+
+{% block title 'ClasificadorEstado list' %}
+
+{% block tituloPagina %}
+    <h1>ClasificadorEstado list</h1>
+{% endblock %}
+
+{% block content -%}
+
+
+    <table class="records_list table table-hover table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('clasificadorestado_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.estado }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('clasificadorestado_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('clasificadorestado_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('clasificadorestado_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

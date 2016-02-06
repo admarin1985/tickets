@@ -1,0 +1,12 @@
+-
+  entity: Buseta\TallerBundle\Entity\Reporte
+  roles: {  }
+  users: {  }
+-
+  entity: Buseta\TallerBundle\Entity\Diagnostico
+  roles: {  }
+  users: {  }
+-
+  entity: Buseta\TallerBundle\Entity\OrdenTrabajo
+  roles: {  }
+  users: {  }

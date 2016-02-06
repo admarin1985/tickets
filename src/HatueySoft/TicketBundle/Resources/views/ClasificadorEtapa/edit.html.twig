@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>ClasificadorEtapa edit</h1>
+
+    {{ form(edit_form) }}
+
+    <a href="{{ path('clasificadoretapa') }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span> Volver
+    </a>
+    <br>
+    <br>
+    {{ form(delete_form) }}
+{% endblock %}

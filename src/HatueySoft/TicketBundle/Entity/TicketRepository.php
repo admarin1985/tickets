@@ -18,11 +18,13 @@ class TicketRepository extends EntityRepository
 
         $repository = $em->getRepository('HatueySoftTicketBundle:Ticket');
         $query = $repository->createQueryBuilder('t')
+            ->select('count(t.id)')
             ->where('t.proyecto = :proyecto')
             ->andWhere('t.estado = :estado')
             ->setParameter('proyecto', $proyecto)
             ->setParameter('estado', $estado)
-            ->getQuery()->getResult();
+            ->getQuery()->getSingleScalarResult();
+
         return $query;
     }
 }

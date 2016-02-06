@@ -1,0 +1,43 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+            <li>
+                <a href="{{ path('core_homepage') }}"><i class="fa fa-dashboard fa-fw"></i> Página Principal</a>
+            </li>
+
+            <li>
+                <a href="{{ path('security_usuario') }}"><i class="fa fa-book fa-fw"></i> Usuarios</a>
+            </li>
+            <li>
+                <a href="{{ path('role_manager') }}"><i class="fa fa-book fa-fw"></i> Roles</a>
+            </li>
+            <li>
+                <a href="{{ path('role_grants') }}"><i class="fa fa-book fa-fw"></i> Rutas</a>
+            </li>
+            <li>
+                <a href="{{ path('aclrules') }}"><i class="fa fa-book fa-fw"></i> Reglas ACL</a>
+            </li>
+            <li>
+                <a href="{{ path('sequence') }}"> Secuencia</a>
+            </li>
+            <li>
+                <a href="{{ path('hatueysoft_menu') }}"> Menú</a>
+            </li>
+
+        </ul>
+        <!-- /#side-menu -->
+    </div>
+    <!-- /.sidebar-collapse -->
+</nav>
+<!-- /.navbar-static-side -->

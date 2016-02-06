@@ -1,0 +1,21 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'Respuesta creation' %}
+
+{% block tituloPagina %}
+    <h1>Respuesta creation</h1>
+{% endblock %}
+
+
+{% block content -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('respuesta') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

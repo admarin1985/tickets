@@ -1,0 +1,18 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'Empresa edit' %}
+
+{% block tituloPagina %}
+    <h1>Empresa edit</h1>
+{% endblock %}
+
+{% block content -%}
+
+    {{ form(edit_form) }}
+    <a href="{{ path('empresa') }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span> Volver
+    </a>
+    <br>
+    <br>
+{{ form(delete_form) }}
+{% endblock %}

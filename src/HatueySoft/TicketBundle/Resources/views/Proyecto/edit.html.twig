@@ -1,0 +1,21 @@
+{% extends 'HatueySoftTicketBundle::layout.html.twig' %}
+
+{% block title 'Proyecto edit' %}
+
+{% block headline block('Proyecto edit') %}
+
+{% block tituloPagina %}
+    <h1>Proyecto edit</h1>
+{% endblock %}
+
+{% block content -%}
+
+    {{ form(edit_form) }}
+    <a href="{{ path('proyecto') }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span> Volver
+    </a>
+    <br>
+    <br>
+
+       {{ form(delete_form) }}
+{% endblock %}

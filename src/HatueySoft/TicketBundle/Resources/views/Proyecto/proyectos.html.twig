@@ -1,0 +1,59 @@
+{% extends 'HatueySoftTicketBundle::layout.html.twig' %}
+
+{% block title 'Proyecto list' %}
+
+{% block headline block('Proyecto list') %}
+
+{% block tituloPagina %}
+    <h1>Proyecto list</h1>
+{% endblock %}
+
+{% block content -%}
+
+
+    <table class="records_list table table-hover table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Nombrecorto</th>
+                <th>Descripcion</th>
+                <th>Fechainicio</th>
+                <th>Fechafin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proyecto in proyectos %}
+            <tr>
+                <td><a href="{{ path('proyecto_show', { 'id': proyecto.id }) }}">{{ proyecto.id }}</a></td>
+                <td>{{ proyecto.nombre }}</td>
+                <td>{{ proyecto.nombreCorto }}</td>
+                <td>{{ proyecto.descripcion }}</td>
+                <td>{% if proyecto.fechaInicio %}{{ proyecto.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if proyecto.fechaFin %}{{ proyecto.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('proyecto_show', { 'id': proyecto.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('proyecto_edit', { 'id': proyecto.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ {% if is_granted('ROLE_ADMIN') %}
+        <ul>
+        <li>
+            <a href="{{ path('proyecto_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endif %}
+    {% endblock %}

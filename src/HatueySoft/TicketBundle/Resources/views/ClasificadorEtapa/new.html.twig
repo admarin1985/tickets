@@ -1,0 +1,21 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'ClasificadorEtapa creation' %}
+
+{% block tituloPagina %}
+    <h1>ClasificadorEtapa creation</h1>
+{% endblock %}
+
+{% block content -%}
+    <h1>ClasificadorEtapa creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('clasificadoretapa') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

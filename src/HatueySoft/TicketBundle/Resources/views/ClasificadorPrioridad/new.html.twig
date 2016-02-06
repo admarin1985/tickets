@@ -1,0 +1,19 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'ClasificadorPrioridad creation' %}
+
+{% block tituloPagina %}
+    <h1>ClasificadorPrioridad creation</h1>
+{% endblock %}
+{% block content -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('clasificadorprioridad') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

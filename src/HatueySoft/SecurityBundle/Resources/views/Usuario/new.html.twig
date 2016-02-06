@@ -1,0 +1,13 @@
+{% extends '@HatueySoftSecurity/layout.html.twig' %}
+
+{% block title 'Usuario creation' %}
+
+{% block headline block('title') %}
+
+{% block tituloPagina %}
+    <h1>New user</h1>
+{% endblock %}
+
+{% block content -%}
+    {% include '@HatueySoftSecurity/Usuario/_form.html.twig' with {'form': form} %}
+{% endblock %}

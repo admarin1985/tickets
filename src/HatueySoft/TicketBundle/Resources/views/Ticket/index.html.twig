@@ -1,0 +1,47 @@
+{% extends 'HatueySoftTicketBundle::layout.html.twig' %}
+
+{% block title 'Ticket list' %}
+
+{% block headline block('title') %}
+
+{% block tituloPagina %}
+    <h1>Ticket list</h1>
+{% endblock %}
+
+{% block content -%}
+
+
+    <table class="records_list table table-hover table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tema</th>
+                <th>Descripcion</th>
+                <th>Fecha</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('ticket_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.tema }}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('ticket_show', { 'id': entity.id }) }}" class="btn btn-default btn-sm">show</a>
+                    <a href="{{ path('ticket_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+            <a href="{{ path('ticket_new') }}" class="btn btn-primary" style="margin-bottom: 8px;"><span class="glyphicon glyphicon-plus"></span>
+                Create a new entry
+            </a>
+
+
+    {% endblock %}

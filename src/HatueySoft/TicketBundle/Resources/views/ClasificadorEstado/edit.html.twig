@@ -1,0 +1,21 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'ClasificadorEstado edit' %}
+
+{% block tituloPagina %}
+    <h1>ClasificadorEstado edit</h1>
+{% endblock %}
+
+{% block content -%}
+
+    {{ form(edit_form) }}
+
+    <a href="{{ path('clasificadorestado') }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span> Volver
+    </a>
+    <br>
+    <br>
+
+{{ form(delete_form) }}
+
+{% endblock %}

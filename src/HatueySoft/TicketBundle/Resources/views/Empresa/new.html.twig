@@ -1,0 +1,19 @@
+{% extends '@HatueySoftTicket/layout.html.twig' %}
+
+{% block title 'Empresa creation' %}
+
+{% block tituloPagina %}
+    <h1>Empresa creation</h1>
+{% endblock %}
+{% block content -%}
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('empresa') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
