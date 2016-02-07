@@ -1,45 +1,206 @@
 {% extends '@HatueySoftTicket/layout.html.twig' %}
 
+{% block stylesheets %}
+    <link href="{{ asset('components/css/github_3.css') }}" rel="stylesheet">
+    <link href="{{ asset('components/css/github_4.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block title 'Ticket show' %}
 
 {% block tituloPagina %}
-    <h1>Ticket show</h1>
+
 {% endblock %}
 
 {% block content -%}
 
-    <table class="records_list table table-hover table-striped table-bordered table-condensed">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Tema</th>
-                <td>{{ entity.tema }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ entity.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Fecha</th>
-                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+                <div class="container repohead-details-container">
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('ticket') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('ticket_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+                    <h1 itemscope="" class="entry-title public " style="font-size: 2em">
+                        <svg aria-hidden="true" class="octicon octicon-repo" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path></svg>
+                        <span class="author"><a href="{{ url('proyecto_show', {'id' : entity.proyecto.id}) }}" class="url fn" itemprop="url" rel="author"><span itemprop="title">{{ entity.proyecto.nombre }}</span></a></span><!--
+                        --><span class="path-divider">/</span><!--
+                        --><strong><a href="{{ url('ticket_show', {'id' : entity.id}) }}">{{ entity.tema }}</a></strong>
+                    </h1>
+
+                </div>
+            </div>
+            <div class="container new-discussion-timeline experiment-repo-nav">
+                <div class="repository-content">
+                    <div class="issues-listing">
+                        <div id="show_issue" class="js-issues-results">
+                            <div id="partial-discussion-header" class="gh-header issue">
+                                <div class="gh-header-show ">
+                                    <div class="gh-header-actions">
+                                        {% if entity.usuario == app.user.username %}
+                                            <a href="{{ url('respuesta_new') }}" class="btn btn-sm btn-primary right" data-hotkey="c">
+                                                Responder
+                                            </a>
+                                        {% endif %}
+                                        <a href="{{ url('ticket_new') }}" class="btn btn-sm btn-primary right" data-hotkey="c">
+                                            Nuevo ticket
+                                        </a>
+                                    </div>
+                                    <h1 class="gh-header-title" style="font-size: 2em">
+                                        <span class="js-issue-title">{{ entity.descripcion }}</span>
+                                        <span class="gh-header-number">#{{ entity.id }}</span>
+                                    </h1>
+                                </div>
+                                <div class="flex-table gh-header-meta">
+                                    <div class="flex-table-item">
+                                        <div class="state state-open">
+                                            <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7S10.14 13.7 7 13.7 1.3 11.14 1.3 8s2.56-5.7 5.7-5.7m0-1.3C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7S10.86 1 7 1z m1 3H6v5h2V4z m0 6H6v2h2V10z"></path></svg>
+                                            {{ entity.estado }}
+                                        </div>
+                                    </div>
+                                    <div class="flex-table-item flex-table-item-primary">
+                                        <a href="#" class="author">{{ entity.usuario.username }}</a> abri&oacute este <span class="noun">ticket</span> hace <time title="{{ entity.fecha|date('Y-m-d') }}" datetime="{{ entity.fecha|date('Y-m-d') }}" is="relative-time">
+                                            {% if "now"|date('Y') - entity.fecha|date('Y') > 0 %}
+                                                {% if "now"|date('Y') - entity.fecha|date('Y') == 1 %}
+                                                    {{ "now"|date('Y') - entity.fecha|date('Y') }} año
+                                                {% else %}
+                                                    {{ "now"|date('Y') - entity.fecha|date('Y') }} años
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if "now"|date('m') - entity.fecha|date('m') > 0 %}
+                                                {% if "now"|date('m') - entity.fecha|date('m') == 1 %}
+                                                    {{ "now"|date('m') - entity.fecha|date('m') }} mes
+                                                {% else %}
+                                                    {{ "now"|date('m') - entity.fecha|date('m') }} meses
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if "now"|date('d') - entity.fecha|date('d') > 0 %}
+                                                {% if "now"|date('d') - entity.fecha|date('d') == 1 %}
+                                                    {{ "now"|date('d') - entity.fecha|date('d') }} d&iacutea
+                                                {% else %}
+                                                    {{ "now"|date('d') - entity.fecha|date('d') }} d&iacuteas
+                                                {% endif %}
+                                            {% endif %}
+                                        </time>
+                                        · {{ render(controller('HatueySoftTicketBundle:Ticket:getCantComentarios', {'ticket' : entity.id })) }} <svg aria-hidden="true" class="octicon octicon-comment" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M13 2H1c-0.55 0-1 0.45-1 1v8c0 0.55 0.45 1 1 1h2v3.5l3.5-3.5h6.5c0.55 0 1-0.45 1-1V3c0-0.55-0.45-1-1-1z m0 9H6L4 13V11H1V3h12v8z"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="discussion_bucket" class="tab-content clearfix">
+                                {% for comentario in comentarios %}
+                                        <div class="timeline-comment-wrapper js-comment-container">
+                                            <a href="#" class="timeline-comment-avatar"><img src="{{ asset('images/user.png') }}" width="24" height="24" alt="{{ comentario.usuario }}"></a>
+                                            <div id="issue-131002598" class="comment previewable-edit timeline-comment js-comment js-task-list-container " data-body-version="bfed8c523687d3513fca5be59e3b975a">
+                                                <div class="timeline-comment-header ">
+                                                    <div class="timeline-comment-header-text">
+                                                        <strong>
+                                                            <a href="#" class="author">{{ comentario.usuario }}</a>
+                                                        </strong>
+                                                        coment&oacute hace
+                                                        <a href="#" class="timestamp">
+                                                            <time title="{{ comentario.fecha|date('Y'-'m'-'d') }}" datetime="2016-02-03T11:54:20Z" is="relative-time">
+                                                                {% if "now"|date('Y') - comentario.fecha|date('Y') > 0 %}
+                                                                    {% if "now"|date('Y') - comentario.fecha|date('Y') == 1 %}
+                                                                        {{ "now"|date('Y') - comentario.fecha|date('Y') }} año
+                                                                    {% else %}
+                                                                        {{ "now"|date('Y') - comentario.fecha|date('Y') }} años
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                                {% if "now"|date('m') - comentario.fecha|date('m') > 0 %}
+                                                                    {% if "now"|date('m') - comentario.fecha|date('m') == 1 %}
+                                                                        {{ "now"|date('m') - comentario.fecha|date('m') }} mes
+                                                                    {% else %}
+                                                                        {{ "now"|date('m') - comentario.fecha|date('m') }} meses
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                                {% if "now"|date('d') - comentario.fecha|date('d') > 0 %}
+                                                                    {% if "now"|date('d') - comentario.fecha|date('d') == 1 %}
+                                                                        {{ "now"|date('d') - comentario.fecha|date('d') }} d&iacutea
+                                                                    {% else %}
+                                                                        {{ "now"|date('d') - comentario.fecha|date('d') }} d&iacuteas
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            </time>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-content">
+
+                                                    <div class="edit-comment-hide">
+                                                        <div class="comment-body markdown-body markdown-format js-comment-body">
+                                                            <p>{{ comentario.comentario }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            {% endfor %}
+                                    <div class="discussion-timeline-actions">
+                                        <div class="timeline-comment-wrapper timeline-new-comment js-comment-container ">
+                                            <a href="#" class="timeline-comment-avatar"><img src="{{ asset('images/user.png') }}" width="24" height="24" alt="{{ app.user.username }}"></a>
+
+                                            <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="" class="js-new-comment-form" data-form-nonce="936b81aeb3d6303fd9411025864a4bd478d60d87" data-remote="true" data-type="json" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="1nUsKtKgmNNOTktrKlvT0xya+OweTCB4u560T9xPaddqRoQRo4gwajfQkb2EFKw8mxILMg/meFqt8fXycDEt1Q==" type="hidden"></div>
+                                                <div class="timeline-comment">
+                                                    <input name="issue" value="678" type="hidden">
+
+                                                    <div class="js-previewable-comment-form js-suggester-container previewable-comment-form write-selected">
+                                                        <div class="comment-form-head tabnav">
+
+                                                            <nav class="tabnav-tabs" role="tablist">
+                                                                <a href="#" class="tabnav-tab write-tab js-write-tab selected" role="tab" aria-selected="true">Escriba</a>
+
+                                                            </nav>
+                                                        </div>
+
+                                                        <div class="comment-form-error js-comment-form-error" style="display:none">    There was an error creating your Issue.
+                                                        </div>
+                                                        <div class="write-content is-default" data-upload-policy-url="/upload/policies/assets" data-upload-repository-id="9279386">
+
+                                                            <textarea name="comment[body]" tabindex="1" id="new_comment_field" placeholder="Escriba un comentario" aria-label="Comment body" class="input-contrast comment-form-textarea"></textarea>
+
+                                                        </div>
+
+                                                        <div class="comment-form-error comment-form-bottom js-comment-update-error"></div>
+                                                    </div>
+
+                                                    <div class="form-actions">
+                                                        <button type="submit" class="btn btn-primary" tabindex="2" data-disable-with="" data-disable-invalid="">
+                                                                Comentar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-backdrop"></div>
+            </div>
+
+
+<script crossorigin="anonymous" src="vista%20de%20un%20issue%20con%20sus%20comentarios_files/frameworks-cd88cfa185f31c4c64e9a8c91cc4e9a48397b1c75fe991a832.js"></script>
+<script async="async" crossorigin="anonymous" src="vista%20de%20un%20issue%20con%20sus%20comentarios_files/github-fb6d86d3abdd91a2a514dc1a43033b720c04ef5d9eb67fcecabb53.js"></script>
+
+
+
+<div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
+    <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+</div>
+<div class="facebox" id="facebox" style="display:none;">
+    <div class="facebox-popup">
+        <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+        </div>
+        <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+            <svg aria-hidden="true" class="octicon octicon-x" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+        </button>
+    </div>
+</div>
+
+
 {% endblock %}
+
+{% block javascripts %}
+    <link as="script" href="{{ asset('components/js/frameworks.js') }}" rel="preload">
+    <link as="script" href="{{ asset('components/js/github.js') }}" rel="preload">
+{% endblock javascripts %}

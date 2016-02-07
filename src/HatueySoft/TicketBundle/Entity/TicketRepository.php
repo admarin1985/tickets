@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class TicketRepository extends EntityRepository
 {
-    public function getCantAbiertos($proyecto, $estado){
+    public function getCantPorEstado($proyecto, $estado){
 
         $em = $this->getEntityManager();
 
@@ -27,4 +27,32 @@ class TicketRepository extends EntityRepository
 
         return $query;
     }
+
+    public function getCantComentarios($ticket)
+    {
+
+        $em = $this->getEntityManager();
+
+        $repository = $em->getRepository('HatueySoftTicketBundle:Comentario');
+        $query = $repository->createQueryBuilder('c')
+            ->select('count(c.id)')
+            ->where('c.ticket = :ticket')
+            ->setParameter('ticket', $ticket)
+            ->getQuery()->getSingleScalarResult();
+
+        return $query;
+    }
+
+    public function getComentarios($ticket)
+    {
+        $em = $this->getEntityManager();
+
+        $reporsitory =  $em->getRepository('HatueySoftTicketBundle:Comentario');
+        $query = $repository->createQueryBuilder('c')
+            ->where('c.ticket = :ticket')
+            ->setParameter('ticket', $ticket)
+            ->getQuery();
+        return $query;
+    }
+
 }

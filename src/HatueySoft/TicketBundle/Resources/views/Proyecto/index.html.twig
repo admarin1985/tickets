@@ -1,45 +1,46 @@
 {% extends 'HatueySoftTicketBundle::layout.html.twig' %}
 
-{% block title 'Proyecto list' %}
+{% block title 'Listado de proyectos' %}
 
-{% block headline block('Proyecto list') %}
+{% block headline block('Listado de proyectos') %}
 
 {% block tituloPagina %}
-    <h1>Proyecto list</h1>
+    <h1>Listado de proyectos</h1>
 {% endblock %}
 
 {% block content -%}
 
-
+    <a href="{{ path('proyecto_new') }}" class="btn btn-primary" style="margin-bottom: 8px">
+        <span class="glyphicon glyphicon-plus"></span>
+        Adicionar proyecto
+    </a>
     <table class="records_list table table-hover table-striped table-bordered table-condensed">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nombre</th>
-                <th>Nombrecorto</th>
-                <th>Descripcion</th>
-                <th>Fechainicio</th>
-                <th>Fechafin</th>
-                <th>Actions</th>
+                <th>Nombre corto</th>
+                <th>Descripci&oacuten</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de fin</th>
+                <th>Operaciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nombre }}</td>
+                <td><a href="{{ path('proyecto_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
                 <td>{{ entity.nombreCorto }}</td>
                 <td>{{ entity.descripcion }}</td>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d') }}{% endif %}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('proyecto_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('proyecto_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
+
+                        <a href="{{ path('proyecto_show', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Mostrar</a>
+
+
+                        <a href="{{ path('proyecto_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+
                 </ul>
                 </td>
             </tr>
@@ -47,11 +48,4 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('proyecto_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

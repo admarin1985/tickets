@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use HatueySoft\TicketBundle\Entity\Ticket;
 use HatueySoft\TicketBundle\Form\TicketType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Ticket controller.
@@ -113,16 +114,16 @@ class TicketController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('HatueySoftTicketBundle:Ticket')->find($id);
-
+        $comentarios = $em->getRepository('HatueySoftTicketBundle:Comentario')->findByTicket($entity);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Ticket entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+
 
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'comentarios' => $comentarios,
         );
     }
 
@@ -246,4 +247,14 @@ class TicketController extends Controller
             ->getForm()
         ;
     }
+
+    public function getCantComentariosAction($ticket)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $r = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantComentarios($ticket);
+
+        return new Response($r);
+
+    }
+
 }

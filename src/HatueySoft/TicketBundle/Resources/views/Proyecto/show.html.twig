@@ -7,36 +7,59 @@
 
 {% endblock %}
 
-{% block title 'Proyecto show' %}
+{% block title 'title' %}
 
 {% block tituloPagina %}
-    <h1>Proyecto: {{ entity.nombre }}</h1>
+
 {% endblock %}
 
 {% block content -%}
 
-    <table class="table table-list-cell">
-        <tr>
-            <th>Nombre corto</th>
-            <td>{{ entity.nombreCorto }}</td>
-        </tr>
-        <tr>
-            <th>Descripci&oacuten</th>
-            <td>{{ entity.descripcion }}</td>
-        </tr>
-        <tr>
-            <th>Fecha de inicio</th>
-            <td>{{ entity.fechaInicio|date('Y-m-d') }}</td>
-        </tr>
-        <tr>
-            <th>Fecha de fin</th>
-            <td>{{ entity.fechaFin|date('Y-m-d') }}</td>
-        </tr>
+    <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+        <div class="container repohead-details-container">
 
-    </table>
+            <h1 class="entry-title public " style="font-size: 2em">
+                <svg aria-hidden="true" class="octicon octicon-repo" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path></svg>
+
+                        <strong><a href="{{ url('ticket_show', {'id' : entity.id}) }}">{{ entity.nombre }}</a></strong>
+            </h1>
+        </div>
+    </div>
+
+    <div class="container pagehead experiment-repo-nav">
+        <div class="repohead-details-container">
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url('proyecto_edit', { 'id': entity.id }) }}" class="btn btn-primary right" role="button" tabindex="0" data-hotkey="c">
+                Editar
+            </a>
+            {% endif %}
+
+            <h1 class="gh-header-title" style="font-size: 2em">
+                <span class="js-issue-title">{{ entity.descripcion }}</span>
+            </h1>
+            <div class="flex-table gh-header-meta">
+                <div class="flex-table-item">
+                    <div class="state state-open">
+                        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7S10.14 13.7 7 13.7 1.3 11.14 1.3 8s2.56-5.7 5.7-5.7m0-1.3C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7S10.86 1 7 1z m1 3H6v5h2V4z m0 6H6v2h2V10z"></path></svg>
+                        {{ entity.etapa }}
+                    </div>
+                </div>
+                <div class="flex-table-item flex-table-item-primary">
+                    Este proyecto inici&oacute el <time title="{{ entity.fechainicio|date('Y-m-d') }}" datetime="{{ entity.fechainicio|date('Y-m-d') }}" is="relative-time">
+                        {{ entity.fechainicio|date('d') }} del mes {{ entity.fechainicio|date('m') }} de {{ entity.fechainicio|date('Y') }} y
+                        termina el {{ entity.fechafin|date('d') }} del mes {{ entity.fechafin|date('m') }} de {{ entity.fechafin|date('Y') }}
+
+                    </time>
+                    · {{ render(controller('HatueySoftTicketBundle:Ticket:getCantComentarios', {'ticket' : entity.id })) }} <svg aria-hidden="true" class="octicon octicon-comment" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M13 2H1c-0.55 0-1 0.45-1 1v8c0 0.55 0.45 1 1 1h2v3.5l3.5-3.5h6.5c0.55 0 1-0.45 1-1V3c0-0.55-0.45-1-1-1z m0 9H6L4 13V11H1V3h12v8z"></path></svg>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 
-    <div class="issues-listing" data-pjax="">
+    <div class="container issues-listing" data-pjax="">
 
         <div class="subnav" data-pjax="">
             <a href="{{ url('ticket_new') }}" class="btn btn-primary right" role="button" tabindex="0" data-hotkey="c">
@@ -147,7 +170,7 @@
               {% endif %}
           </time> por
         {#url del usuario autor#}
-          <a href="{{ url('ticket_show', { 'id': ticket.id }) }}" aria-label="View all issues opened by Blackskyliner" class="tooltipped tooltipped-s muted-link">{{ ticket.usuario }}</a>
+          <a href="{{ url('ticket_show', { 'id': ticket.id }) }}" aria-label="Ver todos los tickets abiertos por {{ ticket.usuario }}" class="tooltipped tooltipped-s muted-link">{{ ticket.usuario }}</a>
       </span>
 
 
@@ -162,9 +185,9 @@
                 </div>
 
                 <div class="table-list-cell issue-comments">
-                    <a href="https://github.com/Haehnchen/idea-php-symfony2-plugin/issues/668" class="muted-link ">
+                    <a href="#" class="muted-link ">
                         <svg aria-hidden="true" class="octicon octicon-comment" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M13 2H1c-0.55 0-1 0.45-1 1v8c0 0.55 0.45 1 1 1h2v3.5l3.5-3.5h6.5c0.55 0 1-0.45 1-1V3c0-0.55-0.45-1-1-1z m0 9H6L4 13V11H1V3h12v8z"></path></svg>
-                        2
+                        {{ render(controller('HatueySoftTicketBundle:Ticket:getCantComentarios', { 'ticket': ticket.id })) }}
                     </a>
                 </div>
             </li>

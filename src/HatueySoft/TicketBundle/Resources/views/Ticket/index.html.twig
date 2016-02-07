@@ -1,47 +1,41 @@
 {% extends 'HatueySoftTicketBundle::layout.html.twig' %}
 
-{% block title 'Ticket list' %}
+{% block title 'Listado de tickets' %}
 
 {% block headline block('title') %}
 
 {% block tituloPagina %}
-    <h1>Ticket list</h1>
+    <h1>Listado de tickets</h1>
 {% endblock %}
 
 {% block content -%}
 
+    <a href="{{ path('ticket_new') }}" class="btn btn-primary" style="margin-bottom: 8px;"><span class="glyphicon glyphicon-plus"></span>
+        Crear nuevo ticket
+    </a>
 
     <table class="records_list table table-hover table-striped table-bordered table-condensed">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Tema</th>
-                <th>Descripcion</th>
+                <th>Descripci&oacuten</th>
                 <th>Fecha</th>
-                <th>Actions</th>
+                <th>Operaciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('ticket_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.tema }}</td>
+                <td><a href="{{ path('ticket_show', { 'id': entity.id }) }}">{{ entity.tema }}</a></td>
                 <td>{{ entity.descripcion }}</td>
-                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d') }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('ticket_show', { 'id': entity.id }) }}" class="btn btn-default btn-sm">show</a>
-                    <a href="{{ path('ticket_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm">edit</a>
+                    <a href="{{ path('ticket_show', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Mostrar</a>
+                    <a href="{{ path('ticket_edit', { 'id': entity.id }) }}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-
-
-            <a href="{{ path('ticket_new') }}" class="btn btn-primary" style="margin-bottom: 8px;"><span class="glyphicon glyphicon-plus"></span>
-                Create a new entry
-            </a>
-
 
     {% endblock %}

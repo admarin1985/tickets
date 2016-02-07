@@ -134,9 +134,9 @@ class ProyectoController extends Controller
         $entity = $em->getRepository('HatueySoftTicketBundle:Proyecto')->find($id);
         $tickets = $em->getRepository('HatueySoftTicketBundle:Ticket')->findByProyecto($entity->getId());
 
-        $ticketsAbiertos = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantAbiertos($entity, 1);
-        $ticketsEnProceso = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantAbiertos($entity, 2);
-        $ticketsTerminados = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantAbiertos($entity, 3);
+        $ticketsAbiertos = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantPorEstado($entity, 1);
+        $ticketsEnProceso = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantPorEstado($entity, 2);
+        $ticketsTerminados = $em->getRepository('HatueySoftTicketBundle:Ticket')->getCantPorEstado($entity, 3);
 
 
 
