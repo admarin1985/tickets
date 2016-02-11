@@ -1,0 +1,16 @@
+hatuey_soft_ticket:
+    resource: "@HatueySoftTicketBundle/Resources/config/routing.yml"
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+hatueysoft_security:
+    resource: "@HatueySoftSecurityBundle/Resources/config/routing.yml"
+    prefix:   /security
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+index:
+    path: /
+    defaults: { _controller: HatueySoftTicketBundle:Proyecto:proyectos }

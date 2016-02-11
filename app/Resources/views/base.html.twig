@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    {% include "::stylesheets.html.twig" %}
+
+    <title>{% block title %}{% endblock %} | Sistema de Gestión de Tickets</title>
+    {% block stylesheets %}{% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+
+<div id={% if is_granted('ROLE_ADMIN') %} "wrapper" {% else %} "wrapper1" {% endif %}">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url('index') }}">Tickets</a>
+        </div>
+<!-- Top Menu Items -->
+    {% block menuSuperior %}
+        <ul class="nav navbar-right top-nav">
+            {% block mensajes %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu message-dropdown">
+
+                    <li class="message-preview">
+                        <a href="#">
+                            <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="" alt="">
+                                    </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading">
+                                        <strong>{{ app.user.nombres is defined ? app.user.nombres ~ ' ' ~ app.user.apellidos : app.user.username }}</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="message-preview">
+                        <a href="#">
+                            <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="" alt="">
+                                    </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading">
+                                        <strong>John Smith</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="message-preview">
+                        <a href="#">
+                            <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="" alt="">
+                                    </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading">
+                                        <strong>John Smith</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="message-footer">
+                        <a href="#">Read All New Messages</a>
+                    </li>
+                </ul>
+            </li>
+            {% endblock %}
+            {% block alerta %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu alert-dropdown">
+                    <li>
+                        <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                    </li>
+                    <li>
+                        <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">View All</a>
+                    </li>
+                </ul>
+            </li>
+            {% endblock %}
+            {% block usuario %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ app.user.nombres is defined ? app.user.nombres ~ ' ' ~ app.user.apellidos : app.user.username }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    </li>
+                </ul>
+            </li>
+            {% endblock %}
+        </ul>
+    {% endblock %}
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        {% if is_granted('ROLE_ADMIN') %}
+    {% block menuLateral %}
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li>
+                    <a href="{{ url('empresa') }}"><i class="fa fa-fw fa-tasks"></i> Empresas</a>
+                </li>
+                <li>
+                    <a href="{{ url('proyecto') }}"><i class="fa fa-fw fa-bar-chart-o"></i> Proyectos</a>
+                </li>
+                <li>
+                    <a href="{{ url('ticket') }}"><i class="fa fa-fw fa-table"></i> Tickets</a>
+                </li>
+                <li>
+                    <a href="{{ url('respuesta') }}"><i class="fa fa-fw fa-edit"></i> Respuestas</a>
+                </li>
+                <li>
+                    <a href="{{ url('comentario') }}"><i class="fa fa-fw fa-comments"></i> Comentarios</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Clasificadores <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="{{ url('clasificadoretapa') }}"> Clasificador de etapas</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('clasificadorestado') }}">Estado de los tickets</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('clasificadorestadoproyecto') }}">Estado del proyecto</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('clasificadorprioridad') }}">Clasificador de prioridad</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('clasificadorticket') }}">Clasificador de ticket</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                  <a href="{{ url('security_usuario') }} "> <i class="fa fa-fw fa-users"></i> Gesti&oacuten de usuarios</a>
+                 </li>
+            </ul>
+        </div>
+    {% endblock %}
+        {% endif %}
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+    {% block tituloPagina %}
+                    <h1 class="page-header">
+                        Blank Page
+                    </h1>
+     {% endblock %}
+     {% block content %}
+        Área de Trabajo
+     {% endblock %}
+
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+{% endblock body %}
+
+<!-- /#wrapper -->
+{% block footer %}
+    <footer class="text-center">
+        <div class="footer"><a href="#"><strong>HatueySoft</strong></a> versión <small>{#{{ version_sistema }}#}</small></div>
+    </footer>
+{% endblock %}
+
+
+{% include "::javascripts.html.twig" %}
+
+{% block foot_script %}
+    {# To only use a subset or add more js overwrite and copy paste this block
+    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
+    Otherwise the regeneration is done on every load in dev more with use_controller: true
+     #}
+    {% block foot_script_assetic %}
+
+    {% endblock foot_script_assetic %}
+
+    {#<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>#}
+    {% block javascripts %}{% endblock javascripts %}
+{% endblock foot_script %}
+
+</body>
+
+</html>

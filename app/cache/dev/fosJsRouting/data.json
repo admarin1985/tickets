@@ -1,0 +1,1 @@
+{"role_edit":{"tokens":[["text","\/edit"],["variable","\/","[^\/]++","role"],["text","\/security\/role"]],"defaults":[],"requirements":[],"hosttokens":[]},"aclrules_toggle":{"tokens":[["text","\/toggle"],["variable","\/","[^\/]++","entity"],["text","\/security\/aclrules"]],"defaults":[],"requirements":[],"hosttokens":[]}}
